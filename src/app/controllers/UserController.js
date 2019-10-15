@@ -8,16 +8,15 @@ class UserController {
       });
 
       if (userExists) {
-        return res.status(400).json({ error: 'User already exists' });
+        return res.status(400).json({ error: 'E-mail já existente' });
       }
 
-      const { id, name, email, phone } = await User.create(req.body);
+      const user = await User.create(req.body);
 
       return res.json({
-        id,
-        name,
-        email,
-        phone,
+        id: user.id,
+        data_criacao: user.dataValues.createdAt,
+        data_atualizacao: user.dataValues.updatedAt,
       });
     } catch (error) {
       return res.status(500).json({ error: 'Problem with server' });

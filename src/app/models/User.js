@@ -1,5 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import authConfig from '../../config/auth';
 
 class User extends Model {
   static init(sequelize) {
@@ -10,18 +12,27 @@ class User extends Model {
         email: Sequelize.STRING,
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
+        token: Sequelize.STRING,
         phone: Sequelize.STRING,
       },
       {
         sequelize,
-      },
+      }
     );
 
     // hook para criptografar a senha
-    this.addHook('beforeSave', async (user) => {
+    this.addHook('beforeSave', async user => {
       if (user.password) {
         user.password_hash = await bcrypt.hash(user.password, 8);
       }
+    });
+
+    // adiciona o token ao usuário
+    this.addHook('beforeSave', async user => {
+      const { email } = user;
+      user.token = jwt.sign({ email }, authConfig.secret, {
+        expiresIn: authConfig.expiresIn,
+      });
     });
 
     return this;
