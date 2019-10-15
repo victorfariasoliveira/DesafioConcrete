@@ -37,11 +37,34 @@ class UserController {
     }
   }
 
-  async findOne(req, res) {
-    const token = req
-    console.log(token)
-    return res.json(token)
+  async find(req, res) {
+    const token = req.headers.authentication
+    const param = req.params.id
 
+    if(!token) {
+      return res.status(401).json({ error: "Não autorizado" });
+    }
+
+    if(!param) {
+      return res.status(400).json({ error: "Id não encontrado" });
+    }
+
+    try {
+
+      const user = await User.findByPk(param)
+
+      if(!user) {
+        return res.status(400).json({ error: "Usuário não encontrado" });
+      }
+
+      if(user.token != token) {
+        return res.status(401).json({ error: "Não autorizado" });
+      }
+      
+      return res.json("funciona")
+    } catch (error) {
+      return res.status(500).json({ error: 'Houve problemas no servidor' });
+    }
   }
 }
 

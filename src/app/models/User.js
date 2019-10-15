@@ -13,6 +13,7 @@ class User extends Model {
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
         token: Sequelize.STRING,
+        last_login: Sequelize.DATE,
         phone: Sequelize.STRING,
       },
       {
@@ -35,6 +36,10 @@ class User extends Model {
       });
       user.token = `Bearer ${token}`
     });
+
+    this.addHook('beforeSave', async user => {
+      user.last_login = Date.now()
+    })
 
     return this;
   }
