@@ -8,7 +8,7 @@ class SessionController {
   async signIn(req, res) {
     const schema = Yup.object().shape({
       email: Yup.string().email().required(),
-      password: Yup.string().required(),
+      senha: Yup.string().required(),
     })
 
     if(!(await schema.isValid(req.body))) {
@@ -16,14 +16,14 @@ class SessionController {
     }
 
     try {
-      const { email, password } = req.body;
+      const { email, senha } = req.body;
       const user = await User.findOne({ where: { email } });
 
       if (!user) {
         return res.status(401).json({ error: "Usuário e/ou senha inválidos" });
       }
   
-      if (!(await user.checkPassword(password))) {
+      if (!(await user.checkPassword(senha))) {
         return res.status(401).json({ error: "Usuário e/ou senha inválidos" });
       }
       

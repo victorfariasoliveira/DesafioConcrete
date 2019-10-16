@@ -1,13 +1,14 @@
 import User from '../models/User';
+import Phone from '../models/Phone'
 import * as Yup from 'yup'
 import { differenceInMinutes } from 'date-fns'
 
 class UserController {
   async signUp(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string().required(),
+      nome: Yup.string().required(),
       email: Yup.string().email().required(),
-      password: Yup.string().required().min(6).max(30),
+      senha: Yup.string().required().min(6).max(30),
       // phone: Yup.array().of({ddd: Yup.string().required(), number: Yup.string().required()})
     })
 
@@ -24,7 +25,21 @@ class UserController {
         return res.status(400).json({ error: 'E-mail já existente' });
       }
 
-      const user = await User.create({...req.body, last_login: Date.now()});
+      const user = await User.create({
+        name: req.body.nome,
+        email: req.body.email,
+        password: req.body.senha,
+        last_login: Date.now()
+      });
+
+      // adição dos telefones do usuário
+      req.body.telefones.forEach(async t => {
+        await Phone.create({
+          user_id: user.id,
+          phone: t.numero,
+          ddd: t.ddd,
+        })
+      })
 
       return res.json({
         id: user.id,
