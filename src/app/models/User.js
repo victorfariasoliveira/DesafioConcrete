@@ -29,7 +29,7 @@ class User extends Model {
     });
 
     // adiciona o token ao usuário
-    this.addHook('beforeSave', async user => {
+    this.addHook('beforeCreate', async user => {
       const { email } = user;
       const token = jwt.sign({ email }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
@@ -37,7 +37,7 @@ class User extends Model {
       user.token = `Bearer ${token}`
     });
 
-    this.addHook('beforeSave', async user => {
+    this.addHook('beforeCreate', async user => {
       user.last_login = Date.now()
     })
 

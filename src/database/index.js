@@ -4,9 +4,8 @@ import databaseConfig from '../config/database';
 // arquivo do conexão com o banco de dados e carregamento de models
 
 import User from '../app/models/User';
-import Phone from '../app/models/Phone'
 
-const models = [User, Phone];
+const models = [User];
 
 class Database {
   constructor() {

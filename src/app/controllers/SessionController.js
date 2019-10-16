@@ -26,7 +26,11 @@ class SessionController {
       if (!(await user.checkPassword(password))) {
         return res.status(401).json({ error: "Usuário e/ou senha inválidos" });
       }
-  
+      
+      // seta o ultimo login do usuário
+      user.last_login = Date.now()
+      user.save()
+
       const { id, createdAt, updatedAt, token } = user;
   
       return res.json({
