@@ -1,11 +1,16 @@
+require('../bootstrap')
+
 module.exports = {
-  dialect: 'mysql',
-  host: 'localhost',
-  username: 'root',
-  database: 'desafio2',
+  dialect: process.env.DB_DIALECT || 'mysql',
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  storage: './__tests__/database.sqlite', // utilizado nos testes
   define: {
     timestamps: true,
     underscored: true,
     underscoredAll: true,
   },
 };
+

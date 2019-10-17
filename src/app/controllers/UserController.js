@@ -9,11 +9,11 @@ class UserController {
       nome: Yup.string().required(),
       email: Yup.string().email().required(),
       senha: Yup.string().required().min(6).max(30),
-      telefones: Yup.array().of(
-        Yup.object().shape({
-          numero: Yup.number().required().min(8).max(9),
-          ddd: Yup.number().required().min(2).max(3)
-        }))
+      telefones: Yup.array()
+      .of(Yup.object().shape({
+        numero: Yup.number().required(),
+        ddd: Yup.number().required(),
+      }))
     })
 
     if(!(await schema.isValid(req.body))) {

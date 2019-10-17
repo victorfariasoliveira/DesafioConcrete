@@ -2,7 +2,7 @@ import express from 'express';
 import routes from './routes';
 
 import './database';
-
+import './bootstrap'
 class App {
   constructor() {
     this.server = express();
