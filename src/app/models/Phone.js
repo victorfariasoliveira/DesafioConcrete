@@ -16,7 +16,6 @@ class Phone extends Model {
 
     return this;
   }
-
 }
 
 export default Phone;

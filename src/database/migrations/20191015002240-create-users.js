@@ -30,7 +30,7 @@ module.exports = {
       },
       last_login: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,
