@@ -15,8 +15,14 @@ class UserController {
         .max(30),
       telefones: Yup.array().of(
         Yup.object().shape({
-          numero: Yup.string().required(),
-          ddd: Yup.string().required(),
+          numero: Yup.string()
+            .required()
+            .min(6)
+            .max(10),
+          ddd: Yup.string()
+            .required()
+            .min(2)
+            .max(3),
         })
       ),
     });

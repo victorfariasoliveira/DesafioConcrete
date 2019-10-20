@@ -44,7 +44,7 @@ class User extends Model {
 
     // adiciona os telefones do usuário
     this.addHook('afterCreate', async user => {
-      if (user.phone) {
+      if (user.phones) {
         await user.phones.forEach(async t => {
           await Phone.create({
             user_id: user.id,
