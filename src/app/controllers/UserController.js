@@ -37,7 +37,7 @@ class UserController {
       });
 
       if (userExists) {
-        return res.status(400).json({ error: 'E-mail já existente' });
+        return res.status(403).json({ error: 'E-mail já existente' });
       }
 
       const user = await User.create({
@@ -48,7 +48,7 @@ class UserController {
         phones: req.body.telefones,
       });
 
-      return res.json({
+      return res.status(201).json({
         id: user.id,
         data_criacao: user.dataValues.createdAt,
         data_atualizacao: user.dataValues.updatedAt,

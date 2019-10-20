@@ -12,6 +12,10 @@ describe('User', () => {
     await truncate();
   });
 
+  afterEach(async () => {
+    await truncate();
+  });
+
   it('Deve ser possível o cadastro', async () => {
     const userAttrs = await factory.attrs('UserForController');
 
@@ -19,10 +23,10 @@ describe('User', () => {
       .post('/users')
       .send(userAttrs);
 
-    expect(response.body).toHaveProperty('id');
+    expect(response.status).toBe(201);
   });
 
-  it('Não deve cadastrar o email invalido', async () => {
+  it('Não deve cadastrar com email invalido', async () => {
     const userAttrs = await factory.attrs('UserForController', {
       email: 'emailerrado@errado',
     });
@@ -34,18 +38,35 @@ describe('User', () => {
     expect(response.status).toBe(400);
   });
 
-  it('Não deve ser possível cadastrar um email duplicado', async () => {
-    const userAttrs = await factory.attrs('UserForController');
-
-    const user = await request(app)
-      .post('/users')
-      .send(userAttrs);
+  it('Não deve cadastrar com email undefined', async () => {
+    const userAttrs = await factory.attrs('UserForController', {
+      email: undefined,
+    });
 
     const response = await request(app)
       .post('/users')
-      .send(user.body);
+      .send(userAttrs);
 
     expect(response.status).toBe(400);
+  });
+
+  it('Não deve ser possível cadastrar com email duplicado', async () => {
+    const userCreated = await factory.create('User', {
+      password: '112233',
+    });
+
+    const userAttrs = {
+      nome: userCreated.name,
+      email: userCreated.email,
+      senha: userCreated.password,
+      telefones: [{ numero: '855555555', ddd: '081' }],
+    };
+
+    const response = await request(app)
+      .post('/users')
+      .send(userAttrs);
+
+    expect(response.status).toBe(403);
   });
 
   it('Deve haver a criptografia da senha do usuário', async () => {
