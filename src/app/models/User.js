@@ -2,6 +2,7 @@ import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import authConfig from '../../config/auth';
+import Phone from './Phone';
 
 class User extends Model {
   static init(sequelize) {
@@ -14,7 +15,7 @@ class User extends Model {
         password_hash: Sequelize.STRING,
         token: Sequelize.STRING,
         last_login: Sequelize.DATE,
-        phone: Sequelize.STRING,
+        phones: Sequelize.VIRTUAL,
       },
       {
         sequelize,
@@ -34,12 +35,25 @@ class User extends Model {
       const token = jwt.sign({ email }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
       });
-      user.token = `Bearer ${token}`
+      user.token = `Bearer ${token}`;
     });
 
     this.addHook('beforeCreate', async user => {
-      user.last_login = Date.now()
-    })
+      user.last_login = Date.now();
+    });
+
+    // adiciona os telefones do usuário
+    this.addHook('afterCreate', async user => {
+      if (user.phone) {
+        await user.phones.forEach(async t => {
+          await Phone.create({
+            user_id: user.id,
+            phone: t.numero,
+            ddd: t.ddd,
+          });
+        });
+      }
+    });
 
     return this;
   }

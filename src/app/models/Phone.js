@@ -6,8 +6,8 @@ class Phone extends Model {
       {
         // apenas as colunas onde há interação do usuário
         user_id: Sequelize.INTEGER,
-        ddd: Sequelize.INTEGER,
-        phone: Sequelize.INTEGER,
+        ddd: Sequelize.STRING,
+        phone: Sequelize.STRING,
       },
       {
         sequelize,

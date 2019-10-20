@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
 import { differenceInMinutes } from 'date-fns';
 import User from '../models/User';
-import Phone from '../models/Phone';
 
 class UserController {
   async signUp(req, res) {
@@ -16,8 +15,8 @@ class UserController {
         .max(30),
       telefones: Yup.array().of(
         Yup.object().shape({
-          numero: Yup.number().required(),
-          ddd: Yup.number().required(),
+          numero: Yup.string().required(),
+          ddd: Yup.string().required(),
         })
       ),
     });
@@ -40,15 +39,7 @@ class UserController {
         email: req.body.email,
         password: req.body.senha,
         last_login: Date.now(),
-      });
-
-      // adição dos telefones do usuário
-      await req.body.telefones.forEach(async t => {
-        await Phone.create({
-          user_id: user.id,
-          phone: t.numero,
-          ddd: t.ddd,
-        });
+        phones: req.body.telefones,
       });
 
       return res.json({
@@ -101,7 +92,7 @@ class UserController {
         senha_hash: user.password_hash,
         token: user.token,
         ultimo_login: user.last_login,
-        telefones: user.phone,
+        telefones: user.phones,
         data_criacao: user.createdAt,
         data_atualizacao: user.updatedAt,
       });
