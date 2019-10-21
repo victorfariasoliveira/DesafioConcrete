@@ -67,18 +67,14 @@ class UserController {
       return res.status(401).json({ error: 'Não autorizado' });
     }
 
-    if (!param) {
-      return res.status(400).json({ error: 'Id não informado' });
-    }
-
     try {
       const user = await User.findByPk(param);
 
       if (!user) {
-        return res.status(400).json({ error: 'Usuário não encontrado' });
+        return res.status(404).json({ error: 'Usuário não encontrado' });
       }
 
-      if (user.token != token) {
+      if (user.token !== token) {
         return res.status(401).json({ error: 'Não autorizado' });
       }
 
@@ -91,7 +87,7 @@ class UserController {
         return res.status(401).json({ error: 'Sessão inválida' });
       }
 
-      return res.json({
+      return res.status(200).json({
         id: user.id,
         nome: user.name,
         email: user.email,
@@ -103,7 +99,6 @@ class UserController {
         data_atualizacao: user.updatedAt,
       });
     } catch (error) {
-      console.log(error);
       return res.status(500).json({ error: 'Houve problemas no servidor' });
     }
   }

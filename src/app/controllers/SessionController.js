@@ -1,7 +1,5 @@
-import jwt from 'jsonwebtoken';
 import * as Yup from 'yup'
 import User from '../models/User';
-import authConfig from '../../config/auth';
 
 
 class SessionController {
@@ -35,7 +33,7 @@ class SessionController {
 
       const { id, createdAt, updatedAt, token } = user;
 
-      return res.json({
+      return res.status(200).json({
         id,
         data_criacao: createdAt,
         data_atualizacao: updatedAt,
