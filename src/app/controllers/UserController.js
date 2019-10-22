@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { differenceInMinutes } from 'date-fns';
 import User from '../models/User';
+import Phone from '../models/Phone'
 
 class UserController {
   async signUp(req, res) {
@@ -55,7 +56,7 @@ class UserController {
         token: user.dataValues.token,
       });
     } catch (error) {
-      return res.status(500).json({ error: 'Houve problemas no servidor' });
+      return res.status(500).json(error);
     }
   }
 
@@ -87,6 +88,8 @@ class UserController {
         return res.status(401).json({ error: 'Sessão inválida' });
       }
 
+      const phones = await Phone.findAll({ where: { user_id: user.id }, attributes: ['phone', 'ddd'] });
+
       return res.status(200).json({
         id: user.id,
         nome: user.name,
@@ -94,12 +97,12 @@ class UserController {
         senha_hash: user.password_hash,
         token: user.token,
         ultimo_login: user.last_login,
-        telefones: user.phones,
+        telefones: phones,
         data_criacao: user.createdAt,
         data_atualizacao: user.updatedAt,
       });
     } catch (error) {
-      return res.status(500).json({ error: 'Houve problemas no servidor' });
+      return res.status(500).json(error);
     }
   }
 }

@@ -1,5 +1,6 @@
 import faker from 'faker';
 import { factory } from 'factory-girl';
+import { subMinutes } from 'date-fns';
 
 import User from '../src/app/models/User';
 
@@ -16,6 +17,7 @@ factory.define('User', User, {
   name: faker.name.findName(),
   email: faker.internet.email(),
   password: faker.internet.password(),
+  last_login: subMinutes(Date.now(), 30),
   phone: [{ numero: '855555555', ddd: '081' }],
 });
 

@@ -40,7 +40,7 @@ class SessionController {
         token,
       });
     } catch (error) {
-      return res.status(500).json({ error: 'Houve problemas no servidor' });
+      return res.status(500).json(error);
     }
   }
 }
