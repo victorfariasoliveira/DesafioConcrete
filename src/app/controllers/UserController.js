@@ -88,7 +88,10 @@ class UserController {
         return res.status(401).json({ error: 'Sessão inválida' });
       }
 
-      const phones = await Phone.findAll({ where: { user_id: user.id }, attributes: ['phone', 'ddd'] });
+      const phones = await Phone.findAll({
+        where: { user_id: user.id },
+        attributes: ['phone', 'ddd'],
+      });
 
       return res.status(200).json({
         id: user.id,

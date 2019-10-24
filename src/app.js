@@ -5,6 +5,7 @@ import Youch from 'youch';
 import * as Sentry from '@sentry/node';
 
 import 'express-async-error';
+import cors from 'cors';
 import routes from './routes';
 import sentryConfig from './config/sentry';
 
@@ -13,6 +14,7 @@ import './database';
 class App {
   constructor() {
     this.server = express();
+    this.server.use(cors());
 
     Sentry.init(sentryConfig);
 
@@ -40,7 +42,7 @@ class App {
         return res.status(500).json(errors);
       }
 
-      return res.status(500).json({error:'Erro no servidor'});
+      return res.status(500).json({ error: 'Erro no servidor' });
     });
   }
 }
