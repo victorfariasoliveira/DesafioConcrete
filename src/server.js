@@ -2,4 +2,4 @@ import app from './app';
 
 require('./bootstrap');
 
-app.listen(3334);
+app.listen(process.env.PORT || 3334);

@@ -2,4 +2,4 @@
 
 require('./bootstrap');
 
-_app2.default.listen(3334);
+_app2.default.listen(process.env.PORT || 3334);
