@@ -1,2 +1,1 @@
-release: yarn build
-web: yarn start
+web: node dist/server.js
