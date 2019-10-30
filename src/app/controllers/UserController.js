@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { differenceInMinutes } from 'date-fns';
 import User from '../models/User';
-import Phone from '../models/Phone'
+import Phone from '../models/Phone';
 
 class UserController {
   async signUp(req, res) {
