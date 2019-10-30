@@ -1,2 +1,2 @@
-release: sucrase ./src -d ./dist --transforms imports
-web: node dist/server.js
+release: yarn build
+web: yarn start
