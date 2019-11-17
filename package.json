@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "pretest": "set NODE_ENV=test&&sequelize db:migrate",
-    "test": "set NODE_ENV=test&&jest",
+    "test": "set NODE_ENV=testes&&jest",
     "posttest": "set NODE_ENV=test&&sequelize db:migrate:undo:all",
     "build": "sucrase ./src -d ./dist --transforms imports",
     "start": "node dist/server.js"
