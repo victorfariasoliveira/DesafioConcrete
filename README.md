@@ -30,7 +30,7 @@ Comandos  | Tarefa a ser realizada
 `yarn test` | Realiza todos os testes localizados na pasta tests
 
 
-Obs: Em caso de inicialização do ambiente de desenvolvimento, você precisará ter instalado em sua maquina o PostgreSQL[https://www.postgresql.org/] e executar o comando em seu terminal:
+Obs: Em caso de inicialização do ambiente de desenvolvimento, você precisará ter instalado em sua maquina o [PostgreSQL](https://www.postgresql.org/) e executar o comando em seu terminal:
 ```bash
 $ yarn sequelize db:migrate
 ```
