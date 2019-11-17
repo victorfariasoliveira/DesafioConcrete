@@ -29,6 +29,12 @@ Comandos  | Tarefa a ser realizada
 `yarn dev` | Inicializa o serviço em ambiente de desenvolvimento, este modo de inicialização permite que serviço seja reiniciado sempre  que houver uma mudança nos arquivo do projeto
 `yarn test` | Realiza todos os testes localizados na pasta tests
 
+
+Obs: Em caso de inicialização do ambiente de desenvolvimento, você precisará ter instalado em sua maquina o PostgreSQL[https://www.postgresql.org/] e executar o comando em seu terminal:
+```bash
+$ yarn sequelize db:migrate
+```
+
 ## Rotas
 
 A api tem algumas rotas disponiveis, neste documento você encontrar quais rotas são essas e um breve exemplo de como utilizar-las
