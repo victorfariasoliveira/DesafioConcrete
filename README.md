@@ -1,9 +1,8 @@
-
 # Desafio NodeJS
 
 Este desafio foi prosposto para uma possível vaga com desenvolvedor node em projetos na
 Concrete. Utilizo a plataforma NodeJS com ferramentas como **expressjs** para o desenvolvimento
-da API em si, **sequelize** como ORM, **eslint** para padronizar o código, **jest** e **faker** para testar e gerar dados randomicos para esses testes respectivamente, o **yarn** para controle de depedências, **sentry** para gerência de erros em produção, **dotenv** 
+da API em si, **sequelize** como ORM, **eslint** para padronizar o código, **jest** e **faker** para testar e gerar dados randomicos para esses testes respectivamente, o **yarn** para controle de depedências, **sentry** para gerência de erros em produção, **dotenv**
 para variaveis de ambiente e **youch** para formatação de erros.
 
 ### Requisitos
@@ -23,34 +22,13 @@ $ yarn install
 
 ### Comandos de inicialização
 
-Para iniciar a aplicação basta executar o comando: `yarn start` mas existe alguns comandos que podem lhe ajudar a realizar tarefas especificas, testes de integração, reinicialização do servidor em caso de mudança em arquivos, etc. Uma lista completa sobre os comandos de inicialização pode ser vista abaixo:
+Para iniciar a aplicação basta executar o comando: `yarn start` mas existe alguns comandos que podem lhe ajudar a realizar outras tarefaas como testes de integração, reinicialização do servidor em caso de mudança em arquivos, etc. Uma lista completa sobre os comandos de inicialização pode ser vista abaixo:
 
 Comandos  | Tarefa a ser realizada
 ------------- | -------------
 `yarn start` | Inicializa o serviço em ambiente de produção
 `yarn dev` | Inicializa o serviço em ambiente de desenvolvimento, este modo de inicialização permite que serviço seja reiniciado sempre  que houver uma mudança nos arquivo do projeto
 `yarn test` | Realiza todos os testes localizados na pasta tests
-
-## Estrutura das pastas
-```
-├─── __tests__/
-	├─── Integrations/
-		└─── ...
-	├─── Utils/
-		└─── ...
-	...
-├─── src/
-	├─── App/
-		├─── Controllers/
-			└───...
-		├─── Models/
-			└───...
-	├─── Config/
-		└───...
-	├─── Utils/
-		└─── ...
-	...
-```
 
 ## Rotas
 
@@ -86,14 +64,14 @@ Content-Type     application/json
 	"nome": "Victor Farias",
 	"email": "victorfarias70@gmail.com",
 	"senha": "123456",
-	"telefones": 
+	"telefones":
     [
 		{
-            "numero": 12345678, 
+            "numero": 12345678,
             "ddd": 81
         },
 		{
-            "numero": 12345679, 
+            "numero": 12345679,
             "ddd": 85
         }
 	]
@@ -154,10 +132,6 @@ Content-Type     application/json
 Authentication    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpY3RvcmZhcmlhczcwQGdtYWlsLmNvbSIsImlhdCI6MTU3MjU0OTAyMywiZXhwIjoxNTcyNTUyNjIzfQ.gWJYdz654AwI5TT4J7naUYnc2Fpd1sxzIpxC2zDbhnU
 ```
 
-**Body**
-
-```
-```
 **Response**
 ```
 {
