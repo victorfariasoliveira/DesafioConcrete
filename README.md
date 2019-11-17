@@ -154,4 +154,3 @@ Authentication    Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZpY3
   "data_atualizacao": "2019-10-31T19:25:56.000Z"
 }
 ```
->>>>>>> develop
